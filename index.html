@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | Luis Sergio Ferreira Junior</title>
+    <!-- Google Fonts: Space Grotesk para títulos (tech feel) e Inter para leitura -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta Tecnológica / Dark Mode */
+            --bg-dark: #0a0f18;
+            --bg-panel: #111827;
+            --bg-card: #1f2937;
+            --text-main: #9ca3af;
+            --text-light: #f3f4f6;
+            --accent: #06b6d4; /* Ciano tecnológico */
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --border-color: #374151;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            /* Fundo com padrão de grade sutil */
+            background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-attachment: fixed;
+            background-position: center center;
+        }
+
+        h1, h2, h3, h4, .tech-font {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-light);
+        }
+
+        /* Animações de Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.9) 0%, rgba(10, 15, 24, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .terminal-prompt {
+            color: var(--accent);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-glow);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .contact-info a, .contact-info span {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 40px;
+            background: var(--bg-panel);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Seções */
+        section {
+            margin-bottom: 60px;
+        }
+
+        section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Sobre / Resumo */
+        .about-text {
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .about-text strong {
+            color: var(--text-light);
+        }
+
+        .about-text em {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        /* Timeline (Experiência e Formação) */
+        .timeline-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 25px;
+            margin-bottom: 40px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover {
+            border-left-color: var(--accent);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-panel);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover::before {
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item .subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .timeline-item ul {
+            list-style-type: none;
+        }
+
+        .timeline-item ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--border-color);
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        /* Grid de Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho no topo do card */
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .skill-card:hover::after {
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .skill-card h4 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .skill-card:hover .tag {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        /* Idiomas (Formato de Lista) */
+        .language-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .language-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .language-list li:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lang-name {
+            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-name i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .lang-level {
+            color: var(--accent);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-glow);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Dados Adicionais (Lista Pontuada Simples) */
+        .additional-info-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .additional-info-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .additional-info-list li::before {
+            content: '\f0da'; /* Ícone de seta do FontAwesome */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+        }
+
+        .additional-info-list strong {
+            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .container { margin: 20px; padding: 25px; }
+            .contact-info { flex-direction: column; align-items: center; gap: 15px; }
+            .timeline-item { padding-left: 20px; }
+            .language-list li { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="reveal">
+            <div class="terminal-prompt">> SYSTEM_INITIALIZATION: OK</div>
+            <h1>LUIS SERGIO FERREIRA JUNIOR</h1>
+            <h2>Relacionamento Institucional | Logística | Relações Internacionais</h2>
+            <div class="contact-info">
+                <span><i class="fa-solid fa-location-crosshairs"></i> Santo André - São Paulo, Brazil</span>
+                <a href="tel:+5511947497172"><i class="fa-solid fa-phone"></i> +55 11 94749-7172</a>
+                <a href="mailto:jr.luisferreira@gmail.com"><i class="fa-solid fa-envelope"></i> jr.luisferreira@gmail.com</a>
+                <a href="https://www.linkedin.com/in/luis-sergio-f-0552751a0" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Resumo Profissional -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-terminal"></i> Resumo Profissional</h2>
+            <p class="about-text">
+                Profissional com experiência em relacionamento institucional, desenvolvimento de parcerias e suporte administrativo em ambientes corporativos dinâmicos, especialmente nos setores de <strong>transporte e logística</strong>. Ao longo da minha trajetória, desenvolvi forte atuação em negociação, comunicação executiva e relacionamento com clientes, fornecedores, stakeholders estratégicos e entidades de referência nacional.
+                <br><br>
+                Tenho perfil analítico, organizado e colaborativo, com facilidade para conduzir demandas simultâneas, construir conexões profissionais e apoiar processos com foco em eficiência e resultados. Também trago vivência internacional e adaptabilidade a diferentes contextos de pressão com uso de <em>Lateral Thinking</em>.
+            </p>
+        </section>
+
+        <!-- Experiência Profissional -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> Experiência Profissional</h2>
+            
+            <div class="timeline-item">
+                <h3>Fundação Memória do Transporte - FUMTRAN</h3>
+                <span class="subtitle">Coordenador de Relacionamento // 2023 - Maio 2026</span>
+                <ul>
+                    <li>Atuação na estruturação e desenvolvimento de parcerias estratégicas com entidades públicas e privadas do setor de transporte e logística.</li>
+                    <li>Responsável por negociações executivas e interlocução com stakeholders de alto nível, conduzindo agendas recorrentes de articulação estratégica.</li>
+                    <li>Coordenação de projetos institucionais e organização de eventos com alto volume de participantes e múltiplos atores institucionais.</li>
+                    <li>Atuação direta com organizações de referência do setor: CNT, SEST SENAT, AEAMESP, SETCESP, NTC&Logística, Autoridade Portuária de Santos, entre outras.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Transluserine Transportes</h3>
+                <span class="subtitle">Analista Administrativo de Logística // 2011 - Atual</span>
+                <ul>
+                    <li>Suporte às rotinas administrativas e operacionais com interface direta com clientes e fornecedores.</li>
+                    <li>Garantia de atendimento às demandas e continuidade contínua dos processos.</li>
+                    <li>Apoio na gestão de processos internos, documentação e atividades de compras, acompanhando prazos e alinhando necessidades.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formação Acadêmica -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-microchip"></i> Formação Acadêmica</h2>
+            
+            <div class="timeline-item">
+                <h3>Universidade de Lisboa (ISCSP)</h3>
+                <span class="subtitle">Bacharelado em Relações Internacionais // 2016 - 2019</span>
+            </div>
+
+            <div class="timeline-item">
+                <h3>ESPM (Escola Sup. de Propaganda e Marketing)</h3>
+                <span class="subtitle">Bacharelado em Relações Internacionais // 2014 - 2016</span>
+            </div>
+        </section>
+
+        <!-- Habilidades e Ferramentas -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-code-branch"></i> Skills & Stack</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-card">
+                    <h4><i class="fa-solid fa-chart-line"></i> Negócios</h4>
+                    <div class="tags">
+                        <span class="tag">Business Development</span>
+                        <span class="tag">Venda Consultiva</span>
+                        <span class="tag">Gestão de Contas B2B</span>
+                        <span class="tag">Expansão de Parcerias</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h4><i class="fa-solid fa-users-gear"></i> Relacionamento</h4>
+                    <div class="tags">
+                        <span class="tag">Stakeholders</span>
+                        <span class="tag">Networking Estratégico</span>
+                        <span class="tag">Relações Governamentais</span>
+                        <span class="tag">Relacionamento Corporativo</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h4><i class="fa-solid fa-satellite-dish"></i> Comunicação</h4>
+                    <div class="tags">
+                        <span class="tag">Comunicação Executiva</span>
+                        <span class="tag">Negociação</span>
+                        <span class="tag">Oratória</span>
+                        <span class="tag">Articulação Institucional</span>
+                    </div>
+                </div>
+
+                <!-- Divisão: Comportamentais -->
+                <div class="skill-card">
+                    <h4><i class="fa-solid fa-brain"></i> Comportamentais</h4>
+                    <div class="tags">
+                        <span class="tag">Proatividade</span>
+                        <span class="tag">Adaptabilidade</span>
+                        <span class="tag">Inteligência Interpessoal</span>
+                        <span class="tag">Perfil Analítico</span>
+                        <span class="tag">Curiosidade</span>
+                    </div>
+                </div>
+
+                <!-- Divisão: Ferramentas isoladas com cor padrão -->
+                <div class="skill-card">
+                    <h4><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas</h4>
+                    <div class="tags">
+                        <span class="tag">Pacote Office</span>
+                        <span class="tag">PowerPoint</span>
+                        <span class="tag">Excel (Intermediário)</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Idiomas -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-globe"></i> Idiomas</h2>
+            <ul class="language-list">
+                <li>
+                    <div class="lang-name"><i class="fa-solid fa-language"></i> Português</div>
+                    <div class="lang-level">Nativo</div>
+                </li>
+                <li>
+                    <div class="lang-name"><i class="fa-solid fa-language"></i> Inglês</div>
+                    <div class="lang-level">Profissional</div>
+                </li>
+                <li>
+                    <div class="lang-name"><i class="fa-solid fa-language"></i> Espanhol</div>
+                    <div class="lang-level">Intermediário</div>
+                </li>
+                <li>
+                    <div class="lang-name"><i class="fa-solid fa-language"></i> Alemão</div>
+                    <div class="lang-level">Básico</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Informações Adicionais -->
+        <section class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-database"></i> Dados Adicionais</h2>
+            <ul class="additional-info-list">
+                <li><strong>Formação Executiva:</strong> Liderança, inteligência interpessoal e comunicação eficaz pelo programa Master Mind LINCE (Napoleon Hill Foundation).</li>
+                <li><strong>Vivência Internacional:</strong> Residência em Lisboa, Portugal (3 anos), com vivência em ambiente multicultural e forte adaptação a contextos diversos de comunicação e relacionamento.</li>
+                <li><strong>Gestão e Estratégia:</strong> Formação como Mestre de Mesa em jogos estratégicos (RPG - Role Playing Game), com experiência em liderança de grupos, mediação de dinâmicas e tomada de decisão sob pressão, aplicável a cenários de negociação e gestão de clientes.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>sys.exit(0) // &copy; 2026 Luis Sergio Ferreira Junior. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- JavaScript para animação de scroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add("active");
+                    }
+                });
+            };
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll(); // Dispara assim que a página carrega
+        });
+    </script>
+</body>
+</html>
